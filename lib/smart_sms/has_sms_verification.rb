@@ -115,8 +115,10 @@ module SmartSMS
         # 发送短信至手机
         #
         def deliver(text = SmartSMS::VerificationCode.random,
-                    tpl_id = SmartSMS.config.template_id)
-          result = SmartSMS.deliver send(self.class.sms_mobile_column), text, tpl_id: tpl_id
+                    options = {}
+          result = SmartSMS.deliver send(self.class.sms_mobile_column),
+                                    text,
+                                    tpl_id: options[:template_id] || SmartSMS.config.template_id
           if result['code'] == 0
             sms = SmartSMS.find_by_sid(result['result']['sid'])['sms']
             save_or_return_message sms, text
