@@ -124,6 +124,7 @@ module SmartSMS
             save_or_return_message sms, text
           else
             errors.add :deliver, result
+            return result
             false
           end
         end
