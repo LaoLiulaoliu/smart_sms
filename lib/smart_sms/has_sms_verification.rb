@@ -115,7 +115,7 @@ module SmartSMS
         # 发送短信至手机
         #
         def deliver(text = SmartSMS::VerificationCode.random,
-                    options = {}
+                    options = {})
           result = SmartSMS.deliver send(self.class.sms_mobile_column),
                                     text,
                                     tpl_id: options[:template_id] || SmartSMS.config.template_id
